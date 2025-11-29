@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Conexión Escrita — Panel Empleado</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body class="page-dashboard page-user">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="logo">
+        <h2>Conexión Escrita</h2>
+        <span class="muted small">Empleado</span>
+      </div>
+      <nav class="nav">
+        <a href="user.html" class="active">Mi local</a>
+        <a href="inventario.html">Inventario</a>
+        <a href="#" class="btn-sm ghost" onclick="logout()">Salir</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container dashboard-grid">
+    <aside class="panel summary">
+      <h3>Resumen local</h3>
+      <ul class="stats-list">
+        <li><strong>Local</strong><span id="nombre-local">Cargando...</span></li>
+        <li><strong>Stock</strong><span>784</span></li>
+        <li><strong>Reservas</strong><span>12</span></li>
+      </ul>
+    </aside>
+
+    <section class="panel wide">
+  <h3>Actividad reciente</h3>
+  <ul class="activity-list" id="actividad-list">
+    <li class="muted">Cargando actividad...</li>
+  </ul>
+</section>
+
+    <section class="panel">
+      <h3>Acciones</h3>
+      <div class="actions-grid">
+        <a class="card-quick" href="inventario.html?mode=add">
+          <span class="big">+</span>
+          <small>Registrar entrada</small>
+        </a>
+        <a class="card-quick" href="inventario.html?mode=sell">
+          <span class="big">💸</span>
+          <small>Registrar venta</small>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <small class="muted">Acceso restringido: empleado — solo ver/gestionar este local</small>
+  </footer>
+<script src="user.js"></script>
+<script>
+  function logout() {
+    const rol = localStorage.getItem("userRole");
+    if (rol !== "vendedor") {
+    window.location.href = "index.html";
+  }
+  }
+
+  (function protegerRuta() {
+    const rol = localStorage.getItem("userRole");
+    if (!rol) {
+      window.location.href = "index.html";
+    }
+  })();
+</script>
+</body>
+</html>

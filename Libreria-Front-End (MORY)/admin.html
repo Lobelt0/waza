@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel Administrador – Conexión Escrita</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body class="page-dashboard">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="logo">
+        <h2>Conexión Escrita</h2>
+        <span class="muted small">Administrador</span>
+      </div>
+
+      <nav class="nav">
+        <a href="admin.html" class="active">Dashboard</a>
+        <a href="inventario.html">Inventario</a>
+        <a href="usuarios.html">Usuarios</a>
+        <a href="materias_primas.html">Materias Primas</a>
+        <a href="puntos_venta.html">Puntos de Venta</a>
+        <a href="libros.html">Libros</a>
+        <a href="#" class="btn-sm ghost" onclick="logout()">Salir</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="panel">
+      <h3>Resumen General</h3>
+
+      <div class="stats-grid">
+        
+        <div class="stat-card">
+          <h4>Total de Libros</h4>
+          <span id="total-libros" class="stat-number">0</span>
+        </div>
+
+        <div class="stat-card">
+          <h4>Total de Tiendas</h4>
+          <span id="total-tiendas" class="stat-number">0</span>
+        </div>
+
+        <div class="stat-card">
+          <h4>Stock Total Global</h4>
+          <span id="stock-total" class="stat-number">0</span>
+        </div>
+
+        <div class="stat-card warning">
+          <h4>Stock Bajo</h4>
+          <span id="stock-bajo" class="stat-number">0</span>
+        </div>
+
+        <div class="stat-card">
+          <h4>Materias Primas</h4>
+          <span id="total-materias" class="stat-number">0</span>
+        </div>
+
+      </div>
+    </section>
+    <section class="panel">
+      <h3>Actividad Reciente Global</h3>
+
+      <ul id="movimientos-globales" class="activity-list">
+        <li class="muted">Cargando actividad...</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="site-footer container">
+    <small class="muted">Conexión Escrita — Panel de Administración</small>
+  </footer>
+  
+  <script>
+    function logout() {
+      localStorage.removeItem("userRole");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("puntoVentaId");
+      window.location.href = "index.html";
+    }
+
+    // Proteger ruta: solo admin
+    const rol = localStorage.getItem("userRole");
+    if (rol !== "admin") {
+      window.location.href = "index.html";
+    }
+  </script>
+  <script src="admin.js"></script>
+  
+</body>
+</html>

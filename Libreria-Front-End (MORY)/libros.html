@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Conexión Escrita — Libros</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+
+<body class="page-dashboard">
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="logo">
+        <h2>Conexión Escrita</h2>
+        <span class="muted small">Administrador</span>
+      </div>
+
+      <nav class="nav">
+        <a href="admin.html">Dashboard</a>
+        <a href="inventario.html">Inventario</a>
+        <a href="usuarios.html">Usuarios</a>
+        <a href="puntos_venta.html">Puntos de venta</a>
+        <a href="libros.html" class="active">Libros</a>
+        <a href="#" onclick="logout()">Salir</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="panel">
+      <div class="panel-row">
+        <h3>Catálogo de Libros</h3>
+
+        <form id="filterFormLibros" class="form-inline">
+          <input name="q" placeholder="Buscar por nombre" />
+          <button class="btn">Buscar</button>
+          <button type="button" class="btn primary">+ Agregar Nuevo Libro</button>
+        </form>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Stock Total</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+
+          <!-- 🔥 ESTE ES EL ID NECESARIO -->
+          <tbody id="tabla-libros-gestion">
+            <tr><td colspan="5">Cargando libros...</td></tr>
+          </tbody>
+
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <script src="libros.js"></script>
+
+</body>
+</html>
