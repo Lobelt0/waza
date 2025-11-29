@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Conexión Escrita — Gestión de Materias Primas</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body class="page-dashboard">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="logo">
+        <h2>Conexión Escrita</h2>
+        <span class="muted small">Administrador</span>
+      </div>
+      <nav class="nav">
+        <a href="admin.html">Dashboard</a>
+        <a href="inventario.html">Inventario</a>
+        <a href="user.html">Usuarios</a>
+        <a href="materias_primas.html" class="active">Materias Primas</a> 
+        <a href="puntos_venta.html">Puntos de venta</a>
+        <a href="libros_gestion.html">Libros</a>
+        <a href="#" class="btn-sm ghost" onclick="logout()">Salir</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="panel-row">
+        <h3>Stock de Materias Primas</h3>
+        <form id="filterFormMP" class="form-inline" method="GET" action="/materias_primas">
+          <input name="q" placeholder="Buscar por nombre o tipo" />
+          <button class="btn">Buscar</button>
+          <button type="button" class="btn primary" onclick="alert('Abrir modal para registrar entrada de materia prima')">
+            + Registrar Entrada
+          </button>
+        </form>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Stock (Páginas/Litros/Unidades)</th>
+              <th>Stock Mínimo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-materias-primas">
+            <tr><td colspan='5'>Cargando materias primas... (Requiere API)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <small class="muted">Conexión Escrita — Gestión de Materias Primas</small>
+  </footer>
+<script>
+  // Script placeholder para cargar datos
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("tabla-materias-primas").innerHTML = `
+      <tr>
+        <td>1</td>
+        <td>Papel Bond 80g (paginas)</td>
+        <td>150,000</td>
+        <td>200,000</td>
+        <td><a class="link" href="#">Ajustar</a></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Tinta Negra (litros)</td>
+        <td>4</td>
+        <td>5</td>
+        <td><a class="link" href="#">Ajustar</a></td>
+      </tr>
+    `;
+  });
+  
+  function logout() {
+    localStorage.removeItem("userRole");
+    window.location.href = "index.html";
+  }
+
+  (function protegerRuta() {
+    const rol = localStorage.getItem("userRole");
+    if (rol !== "admin") {
+      window.location.href = "index.html";
+    }
+  })();
+</script>
+</body>
+</html>
